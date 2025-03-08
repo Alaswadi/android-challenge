@@ -12,7 +12,7 @@ services:
     volumes:
       - ./:/var/www/html
       - /var/www/html/vendor/
-      - ./storage:/var/www/html/storage:delegated
+      - ./storage:/var/www/html/storage
     user: www-data
     networks:
       - laravel-network
@@ -27,7 +27,7 @@ services:
     volumes:
       - ./:/var/www/html
       - /var/www/html/vendor/
-      - ./storage:/var/www/html/storage:delegated
+      - ./storage:/var/www/html/storage
       - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
     networks:
       - laravel-network
@@ -48,6 +48,9 @@ services:
       - "3306:3306"
     networks:
       - laravel-network
+
+volumes:
+  dbdata:
 
 networks:
   laravel-network:

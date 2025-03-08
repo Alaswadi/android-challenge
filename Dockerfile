@@ -32,9 +32,10 @@ RUN composer install
 RUN mkdir -p /var/www/html/storage/framework/{sessions,views,cache} \
     && mkdir -p /var/www/html/storage/logs \
     && chown -R www-data:www-data /var/www/html \
-    && find /var/www/html/storage -type f -exec chmod 664 {} \; \
+    && chmod -R 775 /var/www/html/storage \
+    && chmod -R 775 /var/www/html/bootstrap/cache \
     && find /var/www/html/storage -type d -exec chmod 775 {} \; \
-    && chmod -R 775 /var/www/html/bootstrap/cache
+    && find /var/www/html/storage -type f -exec chmod 664 {} \;
 
 # Switch to www-data user
 USER www-data

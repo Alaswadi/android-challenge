@@ -28,6 +28,9 @@ COPY . .
 # Install dependencies
 RUN composer install
 
+# Copy .env file
+COPY .env.example .env
+
 # Generate key
 RUN php artisan key:generate
 

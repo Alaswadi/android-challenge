@@ -29,8 +29,11 @@ COPY . .
 RUN composer install
 
 # Set permissions
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html/storage \
+RUN mkdir -p /var/www/html/storage/framework/{sessions,views,cache} \
+    && mkdir -p /var/www/html/storage/logs \
+    && chown -R www-data:www-data /var/www/html \
+    && find /var/www/html/storage -type f -exec chmod 664 {} \; \
+    && find /var/www/html/storage -type d -exec chmod 775 {} \; \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
 # Switch to www-data user
